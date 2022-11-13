@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct PlantDetailView: View {
+    var plant: Plant
+
     var body: some View {
         List {
             Section(header: Text("About")) {
@@ -15,19 +17,19 @@ struct PlantDetailView: View {
                     Label("Name", systemImage: "person.fill")
                         .foregroundColor(.accentColor)
                     Spacer()
-                    Text("George")
+                    Text(plant.name)
                 }
                 HStack {
                     Label("Variety", systemImage: "leaf.fill")
                         .foregroundColor(.accentColor)
                     Spacer()
-                    Text("Sempervivum")
+                    Text(plant.variety)
                 }
                 HStack {
                     Label("Location", systemImage: "mappin.and.ellipse")
                         .foregroundColor(.accentColor)
                     Spacer()
-                    Text("Living room end table")
+                    Text(plant.location)
                 }
             }
             Section(header: Text("Watering")) {
@@ -35,55 +37,54 @@ struct PlantDetailView: View {
                     Label("Water frequency", systemImage: "drop.fill")
                         .foregroundColor(.accentColor)
                     Spacer()
-                    Text("7 days")
+                    Text("\(plant.waterFrequencyInDays) days")
                 }
                 HStack {
                     Label("Last watered", systemImage: "calendar.badge.clock")
                         .foregroundColor(.accentColor)
                     Spacer()
-                    Text("November 13, 2022")
+                    if let lastWatering = plant.lastWatering {
+                        Text(lastWatering, style: .date)
+                    } else {
+                        Text("Never")
+                    }
                 }
                 HStack {
                     Label("Next watering", systemImage: "calendar")
                         .foregroundColor(.accentColor)
                     Spacer()
-                    Text("November 15, 2022")
+                    if let nextWatering = plant.nextWatering {
+                        Text(nextWatering, style: .date)
+                    }
                 }
                 Label("Water now", systemImage: "calendar.badge.plus")
                     .font(.headline)
                     .foregroundColor(.accentColor)
             }
-            Section(header: Text("Notes")) {
-                Text("This one is a little etiolated and probably needs to be repotted.")
-                    .frame(minHeight: 75, alignment: .top)
-            }
-            Section(header: Text("History")) {
-                HStack {
-                    Text("Watered")
-                        .foregroundColor(.accentColor)
-                    Spacer()
-                    Text("November 13, 2022")
+            if !plant.notes.isEmpty {
+                Section(header: Text("Notes")) {
+                    Text(plant.notes)
+                        .frame(minHeight: 75, alignment: .top)
                 }
-                HStack {
-                    Text("Watered")
-                        .foregroundColor(.accentColor)
-                    Spacer()
-                    Text("November 6, 2022")
+            }
+            if !plant.history.isEmpty {
+                Section(header: Text("History")) {
+                    ForEach(plant.historySortedByLatest) { record in
+                        HStack {
+                            Text("Watered")
+                                .foregroundColor(.accentColor)
+                            Spacer()
+                            Text(record.date, style: .date)
+                        }
+                    }
                 }
             }
         }
-//        VStack {
-//            Image(systemName: "globe")
-//                .imageScale(.large)
-//                .foregroundColor(.accentColor)
-//            Text("Hello, world!")
-//        }
-//        .padding()
     }
 }
 
 struct PlantDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        PlantDetailView()
+        PlantDetailView(plant: Plant.sampleData[0])
     }
 }

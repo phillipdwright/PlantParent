@@ -11,7 +11,7 @@ import SwiftUI
 struct PlantParentApp: App {
     var body: some Scene {
         WindowGroup {
-            PlantDetailView()
+            PlantDetailView(plant: Plant.sampleData[0])
         }
     }
 }
