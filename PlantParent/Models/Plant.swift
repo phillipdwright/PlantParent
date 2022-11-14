@@ -42,12 +42,17 @@ struct Plant: Identifiable {
 extension Plant {
     static var sampleData: [Plant] {
         return [
-            Plant(name: "George", variety: "Sempervivum", location: "Living room end table", waterFrequencyInDays: 5, notes: "This one is a little etiolated and probably needs to be repotted.", history: [
+            Plant(name: "George", variety: "Sanseveria", location: "Living room end table", waterFrequencyInDays: 5, notes: "This one is a little etiolated and probably needs to be repotted.", history: [
                 Record(date: "2022-11-06", dateFormat: "yyyy-MM-dd"),
                 Record(date: "2022-11-13", dateFormat: "yyyy-MM-dd"),
                 Record(date: "2022-11-01", dateFormat: "yyyy-MM-dd")
             ]),
-            Plant(name: "Carl", variety: "Bird of Paradise", location: "Upstairs landing", waterFrequencyInDays: 7, notes: "")
+            Plant(name: "Carl", variety: "Bird of Paradise", location: "Upstairs landing", waterFrequencyInDays: 7, notes: ""),
+            Plant(name: "Serena", variety: "Stapelia gigantea", location: "Center kitchen cabinet", waterFrequencyInDays: 8, notes: "From Deb. Not sure whether it will do well here.", history: [
+                Record(date: "2022-11-02", dateFormat: "yyyy-MM-dd"),
+                Record(date: "2022-11-10", dateFormat: "yyyy-MM-dd"),
+                Record(date: "2022-10-25", dateFormat: "yyyy-MM-dd")
+            ])
         ]
     }
 }

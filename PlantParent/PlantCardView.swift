@@ -27,18 +27,18 @@ struct PlantCardView: View {
             if let lastWatering = plant.lastWatering, let nextWatering = plant.nextWatering {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text("Last:")
+                        Label("Last", systemImage: "calendar.badge.clock")
                         Text(lastWatering, style: .date)
                     }
                     Spacer()
                     VStack(alignment: .trailing) {
-                        Text("Next:")
+                        Label("Next", systemImage: "calendar.badge.plus")
                         Text(nextWatering, style: .date)
                     }
                 }
                 .font(.caption)
             } else {
-                Text("Never watered")
+                Label("Never watered", systemImage: "calendar.badge.exclamationmark")
                     .font(.caption)
             }
         }

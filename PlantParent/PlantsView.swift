@@ -12,14 +12,19 @@ struct PlantsView: View {
     var body: some View {
         List {
             ForEach(plants) { plant in
-                PlantCardView(plant: plant)
+                NavigationLink(destination: PlantDetailView(plant: plant)) {
+                    PlantCardView(plant: plant)
+                }
             }
         }
+        .navigationTitle("My Plants")
     }
 }
 
 struct PlantsView_Previews: PreviewProvider {
     static var previews: some View {
-        PlantsView(plants: Plant.sampleData)
+        NavigationView {
+            PlantsView(plants: Plant.sampleData)
+        }
     }
 }
