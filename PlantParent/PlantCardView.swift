@@ -12,34 +12,19 @@ struct PlantCardView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            HStack(alignment: .top) {
-                VStack(alignment: .leading) {
-                    Text(plant.name)
-                        .font(.headline)
-                    Text(plant.variety)
-                }
-                Spacer()
-                VStack(alignment: .trailing) {
-                    Text(plant.location)
-                }
+            HStack {
+                Text(plant.name)
+                    .font(.headline)
+                Text("- \(plant.variety)")
             }
-            Spacer()
-            if let lastWatering = plant.lastWatering, let nextWatering = plant.nextWatering {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Label("Last", systemImage: "calendar.badge.clock")
-                        Text(lastWatering, style: .date)
-                    }
-                    Spacer()
-                    VStack(alignment: .trailing) {
-                        Label("Next", systemImage: "calendar.badge.plus")
-                        Text(nextWatering, style: .date)
-                    }
-                }
+            Text(plant.location)
                 .font(.caption)
+            Spacer()
+            if let nextWatering = plant.nextWatering {
+                Label("Next watering", systemImage: "calendar")
+                Text(nextWatering, style: .date)
             } else {
                 Label("Never watered", systemImage: "calendar.badge.exclamationmark")
-                    .font(.caption)
             }
         }
         .padding()
@@ -49,6 +34,6 @@ struct PlantCardView: View {
 struct PlantCardView_Previews: PreviewProvider {
     static var previews: some View {
         PlantCardView(plant: Plant.sampleData[0])
-            .previewLayout(.fixed(width: 400, height: 80))
+            .previewLayout(.fixed(width: 400, height: 120))
     }
 }
