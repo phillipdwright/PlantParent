@@ -40,6 +40,36 @@ struct Plant: Identifiable {
 }
 
 extension Plant {
+    struct EditData {
+        var name = ""
+        var variety = ""
+        var location = ""
+        var waterFrequencyInDays: Double = 7
+        var notes = ""
+
+        var shouldBeDisabled: Bool {
+            return name.isEmpty || variety.isEmpty || location.isEmpty
+        }
+    }
+
+    var editData: EditData {
+        EditData(name: name, variety: variety, location: location, waterFrequencyInDays: Double(waterFrequencyInDays), notes: notes)
+    }
+
+    mutating func update(from data: EditData) {
+        self.name = data.name
+        self.variety = data.variety
+        self.location = data.location
+        self.waterFrequencyInDays = Int(data.waterFrequencyInDays)
+        self.notes = data.notes
+    }
+
+    static func from(data: EditData) -> Plant {
+        Plant(name: data.name, variety: data.variety, location: data.location, waterFrequencyInDays: Int(data.waterFrequencyInDays), notes: data.notes)
+    }
+}
+
+extension Plant {
     static var sampleData: [Plant] {
         return [
             Plant(name: "George", variety: "Sanseveria", location: "Living room end table", waterFrequencyInDays: 5, notes: "This one is a little etiolated and probably needs to be repotted.", history: [

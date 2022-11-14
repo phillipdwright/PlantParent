@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct PlantDetailView: View {
-    var plant: Plant
+    @Binding var plant: Plant
+    @State private var editData = Plant.EditData()
+    @State private var isPresentingEditView = false
 
     var body: some View {
         List {
@@ -80,11 +82,39 @@ struct PlantDetailView: View {
                 }
             }
         }
+        .toolbar {
+            Button("Edit") {
+                isPresentingEditView = true
+                editData = plant.editData
+            }
+        }
+        .sheet(isPresented: $isPresentingEditView) {
+            NavigationView {
+                PlantEditView(editData: $editData)
+                    .navigationTitle(plant.name)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") {
+                                isPresentingEditView = false
+                            }
+                        }
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Save") {
+                                isPresentingEditView = false
+                                plant.update(from: editData)
+                            }
+                            .disabled(editData.shouldBeDisabled)
+                        }
+                    }
+            }
+        }
     }
 }
 
 struct PlantDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        PlantDetailView(plant: Plant.sampleData[0])
+        NavigationView {
+            PlantDetailView(plant: .constant(Plant.sampleData[0]))
+        }
     }
 }

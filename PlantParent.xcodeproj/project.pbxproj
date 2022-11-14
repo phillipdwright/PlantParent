@@ -18,6 +18,7 @@
 		4A9FE83829219CF10018AAB6 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE83729219CF10018AAB6 /* Record.swift */; };
 		4A9FE83A2921B7590018AAB6 /* PlantCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE8392921B7590018AAB6 /* PlantCardView.swift */; };
 		4A9FE83C2921BC8C0018AAB6 /* PlantsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A9FE83B2921BC8C0018AAB6 /* PlantsView.swift */; };
+		4AFCB2462921C6A60061A0C1 /* PlantEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFCB2452921C6A60061A0C1 /* PlantEditView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		4A9FE83729219CF10018AAB6 /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		4A9FE8392921B7590018AAB6 /* PlantCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantCardView.swift; sourceTree = "<group>"; };
 		4A9FE83B2921BC8C0018AAB6 /* PlantsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsView.swift; sourceTree = "<group>"; };
+		4AFCB2452921C6A60061A0C1 /* PlantEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantEditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				4A9FE81029217DA30018AAB6 /* Preview Content */,
 				4A9FE8392921B7590018AAB6 /* PlantCardView.swift */,
 				4A9FE83B2921BC8C0018AAB6 /* PlantsView.swift */,
+				4AFCB2452921C6A60061A0C1 /* PlantEditView.swift */,
 			);
 			path = PlantParent;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AFCB2462921C6A60061A0C1 /* PlantEditView.swift in Sources */,
 				4A9FE80D29217D9F0018AAB6 /* PlantDetailView.swift in Sources */,
 				4A9FE83A2921B7590018AAB6 /* PlantCardView.swift in Sources */,
 				4A9FE83C2921BC8C0018AAB6 /* PlantsView.swift in Sources */,

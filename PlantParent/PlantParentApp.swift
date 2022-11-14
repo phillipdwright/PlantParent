@@ -9,11 +9,11 @@ import SwiftUI
 
 @main
 struct PlantParentApp: App {
-    var plants = Plant.sampleData
+    @State var plants = Plant.sampleData
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                PlantsView(plants: plants)
+                PlantsView(plants: $plants)
             }
         }
     }
