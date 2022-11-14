@@ -10,7 +10,9 @@ import SwiftUI
 struct PlantDetailView: View {
     @Binding var plant: Plant
     @State private var editData = Plant.EditData()
+    @State private var newWaterDate = Date()
     @State private var isPresentingEditView = false
+    @State private var isPresentingWaterView = false
 
     var body: some View {
         List {
@@ -59,9 +61,13 @@ struct PlantDetailView: View {
                         Text(nextWatering, style: .date)
                     }
                 }
-                Label("Water now", systemImage: "calendar.badge.plus")
-                    .font(.headline)
-                    .foregroundColor(.accentColor)
+                Button(action: {
+                    isPresentingWaterView = true
+                }) {
+                    Label("Water now", systemImage: "calendar.badge.plus")
+                }
+                .font(.headline)
+                .foregroundColor(.accentColor)
             }
             if !plant.notes.isEmpty {
                 Section(header: Text("Notes")) {
@@ -104,6 +110,28 @@ struct PlantDetailView: View {
                                 plant.update(from: editData)
                             }
                             .disabled(editData.shouldBeDisabled)
+                        }
+                    }
+            }
+        }
+        .sheet(isPresented: $isPresentingWaterView) {
+            NavigationView {
+                WateringView(date: $newWaterDate)
+                    .navigationTitle("Water \(plant.name)")
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Cancel") {
+                                isPresentingWaterView = false
+                                newWaterDate = Date()
+                            }
+                        }
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Water") {
+                                isPresentingWaterView = false
+                                let newWateringRecord = Record(date: newWaterDate)
+                                plant.history.append(newWateringRecord)
+                                newWaterDate = Date()
+                            }
                         }
                     }
             }
