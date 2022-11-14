@@ -29,6 +29,18 @@ struct PlantEditView: View {
                 TextField("Notes", text: $editData.notes, axis: .vertical)
                     .frame(minHeight: 75, alignment: .top)
             }
+            if !editData.history.isEmpty {
+                Section(header: Text("History")) {
+                    ForEach(editData.historySortedByLatest) { record in
+                        Text(record.date, style: .date)
+                    }
+                    .onDelete{ indices in
+                        var historySorted = editData.historySortedByLatest
+                        historySorted.remove(atOffsets: indices)
+                        editData.history = historySorted
+                    }
+                }
+            }
         }
     }
 }

@@ -46,14 +46,19 @@ extension Plant {
         var location = ""
         var waterFrequencyInDays: Double = 7
         var notes = ""
+        var history: [Record] = []
 
         var shouldBeDisabled: Bool {
             return name.isEmpty || variety.isEmpty || location.isEmpty
         }
+
+        var historySortedByLatest: [Record] {
+            history.sorted().reversed()
+        }
     }
 
     var editData: EditData {
-        EditData(name: name, variety: variety, location: location, waterFrequencyInDays: Double(waterFrequencyInDays), notes: notes)
+        EditData(name: name, variety: variety, location: location, waterFrequencyInDays: Double(waterFrequencyInDays), notes: notes, history: history)
     }
 
     mutating func update(from data: EditData) {
@@ -62,10 +67,11 @@ extension Plant {
         self.location = data.location
         self.waterFrequencyInDays = Int(data.waterFrequencyInDays)
         self.notes = data.notes
+        self.history = data.history
     }
 
     static func from(data: EditData) -> Plant {
-        Plant(name: data.name, variety: data.variety, location: data.location, waterFrequencyInDays: Int(data.waterFrequencyInDays), notes: data.notes)
+        Plant(name: data.name, variety: data.variety, location: data.location, waterFrequencyInDays: Int(data.waterFrequencyInDays), notes: data.notes, history: data.history)
     }
 }
 
